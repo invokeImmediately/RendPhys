@@ -5,11 +5,11 @@ RendPhys.findProp = function( obj, prop ) {
 	let result = false;
 	if ( typeof prop === 'string' ) {
 		result = obj.find( function( elem ) {
-			return elem === 'formContainer';
+			return elem === prop;
 		} );
 	} else {
 		throw new TypeError( "RendPhys.findProp was passed a parameter for the property to search f\
-or that wasn't typed as a string." );
+					or that wasn't typed as a string." );
 	}
 
 	return result;
@@ -63,8 +63,20 @@ RendPhys.Point2D = ( function() {
 } )();
 
 RendPhys.Vector2D = ( function( rp ) {
-	const v2D_Defaults = {
-		magnitude: new DcrMath.Point2D( 0, 0 )
+	// TODO: Finish implementing
+
+	// const v2D_Defaults = {
+	// 	magnitude: new DcrMath.Point2D( 0, 0 )
+	// }
+
+	function calcDistAndMag( v2dInst ) {
+		v2dInst._magnitude = Math.sqrt( v2dInst.x ** 2 + v2dInst.y ** 2 );
+		v2dInst._direction = Math.atan2 ( v2dInst._y, v2dInst._x );
+	}
+
+	function calcXAndY( v2dInst ) {
+		v2dInst._x = v2dInst.magnitude * Math.cos( v2dInst.direction );
+		v2dInst._y = v2dInst.magnitude * Math.sin( v2dInst.direction );		
 	}
 
 	class Vector2D {
@@ -73,49 +85,82 @@ RendPhys.Vector2D = ( function( rp ) {
 				if ( typeof params !== 'object' ) {
 					throw new TypeError( 'I was not passed an object as expected.' )
 				}
-				let propsList = Object.getOwnPropertyNames( params );
-				if ( propsList.length !== 2 ) {
+				let propNames = Object.getOwnPropertyNames( params );
+				if ( propNames.length !== 2 ) {
 					throw new TypeError( 'I was not passed object containing the correct number of \
-properties representing my parameters.' );
+						properties representing my parameters.' );
 				}
-				if ( rp.findProp( params, 'magnitude' ) && rp.findProp( params, 'direction' ) ) {
+				if (
+					rp.findProp( propNames, 'magnitude' ) &&
+					rp.findProp( propNames, 'direction' )
+				) {
 					this._magnitude = params.magnitude;
 					this._direction = params.direction;
-					this._x = params.magnitude * Math.cos( this.direction );
-					this._y = params.magnitude * Math.sin( this.direction );
-				} else if ( rp.findProp( params, 'x' ) && rp.findProp( params, 'y' ) ) {
+					calcXAndY( this );
+				} else if (
+					rp.findProp( propNames, 'x' ) &&
+					rp.findProp( propNames, 'y' )
+				) {
 					this._x = params.x;
 					this._y = params.y;
-					this._magnitude = Math.sqrt( this.x ** 2 + this.y ** 2 );
-					this._angle = Math.atan2 ( this._y, this._x );
+					calcDistAndMag( this );
 				} else {
 					throw new TypeError( 'I was not passed object containing appropriate parameters\
- from which a vector could be represented.' );
+						 from which a vector could be represented.' );
 				}
 			} catch ( err ) {
 				console.log( 'An instance of ' + this.constructor.name +
 					' encountered the following ' + err.name + ' : ' + err.message );
 			}
 		}
+
+		get direction() {
+			return this._direction;
+		}
+
+		get magnitude() {
+			return this._magnitude;
+		}
+
+		get x() {
+			return this._x;
+		}
+
+		get y() {
+			return this._y;
+		}
+
+		logSelf() {
+			console.log( 'Instance of ' + this.constructor.name + ":", this );
+		}
+
+		set direction( val ) {
+			this._direction = val;
+			calcXAndY( this );
+		}
+
+		set magnitude( val ) {
+			this._magnitude = val;
+			calcXAndY( this );
+		}
+
+		set x( val ) {
+			this._x = val;
+			calcDistAndMag( this );
+		}
+
+		set y( val ) {
+			this._x = val;
+			calcDistAndMag( this );
+		}
+
+		// TODO: Write operator functions.
 	};
-
-	// TODO: Write getters & setters for magnitude, direction, x, and y.
-
-	// TODO: Write operator functions.
 
 	return Vector2D;
 } )( RendPhys );
 
 
-RendPhys.Circle2D {
+RendPhys.Circle2D = ( function( rp ) {
 	
-}
-
-class Taco {
-	constructor() {
-		this.type = "Al Pastor";
-		this.clName = this.constructor.name;
-    }
-}
-var foodItem = new Taco();
-console.log( foodItem.type + ' ' + foodItem.clName );
+} )( RendPhys );
