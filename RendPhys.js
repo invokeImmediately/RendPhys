@@ -1,5 +1,56 @@
-// RendPhys: HTML5 + CSS + JS based renderer for the visualization of simulated physics phenomena.
+/*!*************************************************************************************************
+ * RendPhys.js
+ * -------------------------------------------------------------------------------------------------
+ * SUMMARY: HTML5 + CSS + JS based renderer for the visualization of simulated physics phenomena.
+ *
+ * AUTHOR: Daniel Rieck [daniel.rieck@wsu.edu] (https://github.com/invokeImmediately)
+ *
+ * REPOSITORY: https://github.com/invokeImmediately/RendPhys
+ *
+ * LICENSE: ISC - Copyright (c) 2019 Daniel C. Rieck.
+ *
+ *   Permission to use, copy, modify, and/or distribute this software for any purpose with or
+ *   without fee is hereby granted, provided that the above copyright notice and this permission
+ *   notice appear in all copies.
+ *
+ *   THE SOFTWARE IS PROVIDED "AS IS" AND DANIEL RIECK DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS
+ *   SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL
+ *   DANIEL RIECK BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY
+ *   DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF
+ *   CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+ *   PERFORMANCE OF THIS SOFTWARE.
+ **************************************************************************************************/
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// TABLE OF CONTENTS
+// -----------------
+//   §1: Script dependencies..................................................................42
+//     §1.1: Namespace declaration............................................................45
+//   §2: Utility functions....................................................................50
+//     §2.1: RendPhys.findProp................................................................53
+//     §2.2: RendPhys.degToRad................................................................70
+//     §2.3: RendPhys.radToDeg................................................................75
+//   §3: Renderer interface...................................................................80
+//     §3.1: RendPhys.Renderer................................................................83
+//   §4: Physics abstractions.................................................................94
+//     §4.1: RendPhys.Circle2D................................................................97
+//     §4.2: RendPhys.Point2D................................................................104
+//     §4.3: RendPhys.Vertex2D...............................................................146
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// §1: Script dependencies
+
+//////////////////////////////////////////////////
+// §1.1: Namespace declaration
+
 var RendPhys = RendPhys || {};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// §2: Script dependencies
+
+//////////////////////////////////////////////////
+// §2.1: RendPhys.findProp
 
 RendPhys.findProp = function( obj, prop ) {
 	let result = false;
@@ -15,6 +66,22 @@ RendPhys.findProp = function( obj, prop ) {
 	return result;
 };
 
+//////////////////////////////////////////////////
+// §2.2: RendPhys.degToRad
+
+// TODO: Finish writing utility function
+
+//////////////////////////////////////////////////
+// §2.3: RendPhys.radToDeg
+
+// TODO: Finish writing utility function
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// §3: Renderer interface
+
+//////////////////////////////////////////////////
+// §3.1: RendPhys.Renderer
+
 RendPhys.Renderer = ( function ( $, rp ) {
 	class Renderer {
 		// TODO: Finish writing class which serves as an interface to a canvas element that will render physics elements.
@@ -22,6 +89,19 @@ RendPhys.Renderer = ( function ( $, rp ) {
 
 	return Renderer;
 } )( jQuery, RendPhys );
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// §4: Physics abstractions
+
+//////////////////////////////////////////////////
+// §4.1: RendPhys.Circle2D
+
+RendPhys.Circle2D = ( function( rp ) {
+	// TODO: Finish writing class
+} )( RendPhys );
+
+//////////////////////////////////////////////////
+// §4.2: RendPhys.Point2D
 
 RendPhys.Point2D = ( function() {
 	const p2D_Defaults = {
@@ -61,6 +141,9 @@ RendPhys.Point2D = ( function() {
 
 	return Point2D;
 } )();
+
+//////////////////////////////////////////////////
+// §4.3: RendPhys.Vector2D
 
 RendPhys.Vector2D = ( function( rp ) {
 	// TODO: Finish implementing
@@ -158,9 +241,4 @@ RendPhys.Vector2D = ( function( rp ) {
 	};
 
 	return Vector2D;
-} )( RendPhys );
-
-
-RendPhys.Circle2D = ( function( rp ) {
-	
 } )( RendPhys );
