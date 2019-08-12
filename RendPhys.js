@@ -29,13 +29,13 @@
 //   §2: Utility functions....................................................................50
 //     §2.1: RendPhys.findProp................................................................53
 //     §2.2: RendPhys.degToRad................................................................70
-//     §2.3: RendPhys.radToDeg................................................................75
-//   §3: Renderer interface...................................................................80
-//     §3.1: RendPhys.Renderer................................................................83
-//   §4: Physics abstractions.................................................................94
-//     §4.1: RendPhys.Circle2D................................................................97
-//     §4.2: RendPhys.Point2D................................................................104
-//     §4.3: RendPhys.Vertex2D...............................................................146
+//     §2.3: RendPhys.radToDeg................................................................89
+//   §3: Renderer interface..................................................................108
+//     §3.1: RendPhys.Renderer...............................................................111
+//   §4: Physics abstractions................................................................122
+//     §4.1: RendPhys.Circle2D...............................................................125
+//     §4.2: RendPhys.Point2D................................................................132
+//     §4.3: RendPhys.Vertex2D...............................................................174
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -69,12 +69,40 @@ RendPhys.findProp = function( obj, prop ) {
 //////////////////////////////////////////////////
 // §2.2: RendPhys.degToRad
 
-// TODO: Finish writing utility function
+RendPhys.degToRad = function( angle ) {
+	let result = undefined;
+
+	try {
+		if ( typeof angle === 'number' ) {
+			result = angle * Math.PI / 180;
+		} else {
+			throw new TypeError( 'RendPhys.degToRad was passed a value that was not a number.' );
+		}
+	} catch( err ) {
+		console.log( err.message );
+	}
+
+	return result;
+}
 
 //////////////////////////////////////////////////
 // §2.3: RendPhys.radToDeg
 
-// TODO: Finish writing utility function
+RendPhys.radToDeg = function( angle ) {
+	let result = undefined;
+
+	try {
+		if ( typeof angle === 'number' ) {
+			result = angle * 180 / Math.PI;
+		} else {
+			throw new TypeError( 'RendPhys.radToDeg was passed a value that was not a number.' );
+		}
+	} catch( err ) {
+		console.log( err.message );
+	}
+
+	return result;
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 // §3: Renderer interface
